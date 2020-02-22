@@ -14,7 +14,12 @@ class FinderActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
 
-    var coords : HashMap<Double, Double> = hashMapOf(-1.0 to 1.0, -2.0 to 3.0)
+    //Latitude, Longtitude
+    var coords : HashMap<Double, Double> = hashMapOf(-1.0 to 1.0, -2.0 to 3.0, 49.279692 to -122.925180,
+        49.278593 to -122.924697, 49.278656 to -122.924826, 49.278726 to -122.922294, 49.279790 to -122.918861,
+        49.275628 to -122.921601, 49.279855 to -122.918583, 49.281199 to -122.916630, 49.277211 to -122.916170,
+        49.278114 to -122.914807, 49.277995 to -122.911867, 49.277888 to -122.909876, 49.280389 to -122.907480,
+        49.277423 to -122.904471, 49.274531 to -122.912496)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
