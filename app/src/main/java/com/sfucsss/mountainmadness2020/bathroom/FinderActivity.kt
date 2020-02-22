@@ -14,6 +14,8 @@ class FinderActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
 
+    var coords : HashMap<Double, Double> = hashMapOf(-1.0 to 1.0, -2.0 to 3.0)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_finder)
@@ -35,9 +37,11 @@ class FinderActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+
         // Add a marker in Sydney and move the camera
         val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+        mMap.addMarker(MarkerOptions().position(sydney).title("A"))
+            .showInfoWindow()
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 }
