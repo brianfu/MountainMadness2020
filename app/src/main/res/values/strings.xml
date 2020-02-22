@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Bathroom</string>
+    <string name="title_activity_finder">Bathroom Finder</string>
 </resources>
