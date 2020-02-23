@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.io.*;
 import java.lang.String;
 
-public class myMap {
+public class MyMap {
 
     int s1 = 0;
     int s2 = 11;

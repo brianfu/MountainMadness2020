@@ -22,7 +22,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
 
     //Latitude, Longitude
-    myMap myLocations = new myMap();
+    MyMap myLocations = new MyMap();
     ArrayList<Pin> pins = myLocations.locations();
 
     //Stuff to pass
