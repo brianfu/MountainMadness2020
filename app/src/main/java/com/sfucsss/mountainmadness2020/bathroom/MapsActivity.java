@@ -172,7 +172,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (counter == 0){
             View view = new View(this);
-            onUpdate(view); //don't actually need the value, the pass is needed to have it work with the button, putting in garbage is fine
+            gameManager.update(mLastKnownLocation.getLongitude(), mLastKnownLocation.getLatitude(), timeTaken);
             counter = 200; //reset counter
         }else{
             counter--;
@@ -195,49 +195,63 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-
-        Marker marker = mMap.addMarker(new MarkerOptions().position(sydney).title("A"));
-        marker.showInfoWindow();
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
         updateLocationUI();
         getDeviceLocation();
+
+        // Add a marker in Sydney and move the camera
+//        LatLng sydney = new LatLng(-34, 151);
+//
+//        Marker marker = mMap.addMarker(new MarkerOptions().position(sydney).title("A"));
+//        marker.showInfoWindow();
+
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        ArrayList<Pin> pinlist = gameManager.allPins();
+        LatLng newLoc = new LatLng(0.0, 0.0);
+        for(Pin ele : pinlist){
+            newLoc = new LatLng(ele.longitude, ele.latitude);
+            Marker marker = mMap.addMarker(new MarkerOptions().position(newLoc).title(String.valueOf(ele.letter)));
+            marker.showInfoWindow();
+        }
+
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(newLoc));
+
+
     }
 
     private ArrayList<Pin> pinlistTest = new ArrayList<Pin>();
     public void onUpdate(View view){
         //update this every second if possible, if not just call it whenever the button's pressed
-
-        //gameManager.update(0.0, 0.0, timeTaken); //todo implement curr_location grabbing and put in appropiately
         //gameManager.update is currently broken (myMap NPE)
+
+
+//        ArrayList<Pin> pinlist = gameManager.allPins();
+//
+//        Pin lastpin = new Pin(1500.0,1000.0, 'a'); //last thing pinned, move camera to this
+//
+//        ArrayList<Marker> markerlist = new ArrayList<Marker>();
+//        for(Pin ele : pinlist){
+//            LatLng newLoc = new LatLng(ele.latitude, ele.longitude);
+//            Marker marker = mMap.addMarker(new MarkerOptions().position(newLoc).title(String.valueOf(ele.letter)));
+//            //markerlist.add(marker);
+//            marker.showInfoWindow();
+//            lastpin = ele;
+//        }
+
 
         getDeviceLocation();
 
-        ArrayList<Pin> pinlist = gameManager.allPins();
+        //Pin lastpin = pinlist.get(pinlist.size() - 1);
+//        LatLng tmpLL = new LatLng(lastpin.latitude, lastpin.longitude);
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(tmpLL));
 
-        Pin lastpin = new Pin(1500.0,1000.0, 'a'); //last thing pinned, move camera to this
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+//                new LatLng(mLastKnownLocation.getLatitude(),
+//                        mLastKnownLocation.getLongitude()), 12));
 
-//        lastpin= new Pin(200.0, 300.0, 'c');
-//        Pin pin2 = new Pin(300.0, 200.0, 'b');
-//        ArrayList<Pin> pinlist = new ArrayList<Pin>();
-//        pinlist.add(lastpin);
-//        pinlist.add(pin2);
 
-        for(Pin ele : pinlist){
-            LatLng newLoc = new LatLng(ele.latitude, ele.longitude);
-            Marker marker = mMap.addMarker(new MarkerOptions().position(newLoc).title(String.valueOf(ele.letter)));
-            marker.showInfoWindow();
-            lastpin = ele;
-        }
-
-        LatLng tmpLL = new LatLng(lastpin.latitude, lastpin.longitude);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(tmpLL));
-
-        updateLocationUI();
+        //updateLocationUI();
     }
 
 
