@@ -9,6 +9,20 @@ import kotlinx.android.synthetic.main.activity_result.*
 
 class ResultActivity : AppCompatActivity() {
 
+    companion object { //static
+        internal fun wordsStringBuilder(wordsFound : ArrayList<String>) : String{
+            var res = "" //String concat works as normal
+            res += "Words solved: ["
+
+            for (word in wordsFound){
+                res += " $word"
+            }
+
+            res += " ]"
+            return res
+        }
+    }
+
     lateinit var extras : Bundle
     lateinit var wordsFound : ArrayList<String> //take this out, process it here, and shove it back in after
     var useLastLetter = false //init
@@ -30,6 +44,8 @@ class ResultActivity : AppCompatActivity() {
             result_string.text = "That isn't a word!"
             //todo: point losing logic here
         }
+
+        words_solved.text = wordsStringBuilder(wordsFound)
 
     }
 

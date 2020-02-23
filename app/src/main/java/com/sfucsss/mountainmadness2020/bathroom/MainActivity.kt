@@ -1,5 +1,6 @@
 package com.sfucsss.mountainmadness2020.bathroom
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,10 +16,11 @@ class MainActivity : AppCompatActivity() {
     fun mapButtonClick(view : View){
 
         val mapIntent = Intent(this, MapsActivity::class.java)
-        mapIntent.putExtra("hello", "world")
-
+        //Bundle is inited in MapsActivity
         startActivity(mapIntent)
 
+        setResult(Activity.RESULT_OK, mapIntent)
+        finish(); //Kill this
     }
 
 }
