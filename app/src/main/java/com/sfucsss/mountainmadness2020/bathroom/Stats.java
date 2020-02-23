@@ -42,7 +42,7 @@ public class Stats {
         }
         return returnWords;
     }
-    public boolean search(Checkpoint checkpoint) {
+    public boolean contains(Checkpoint checkpoint) {
         return words().contains(checkpoint.currentWord());
     }
     public void update(Checkpoint checkpoint) {

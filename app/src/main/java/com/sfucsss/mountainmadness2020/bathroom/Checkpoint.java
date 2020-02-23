@@ -35,7 +35,7 @@ public class Checkpoint {
     public double score() {
         return currentWord().length();
     }
-    public boolean search(Pin pin) {
+    public boolean contains(Pin pin) {
         for (Pin x : pins) {
             if (pin.equal(x)) {
                 return true;
