@@ -59,6 +59,7 @@ public class MyMap {
                 return pin;
             }
         }
-        return null;
+        Pin pin = new Pin(0,0,'A');
+        return pin;
     }
 }
