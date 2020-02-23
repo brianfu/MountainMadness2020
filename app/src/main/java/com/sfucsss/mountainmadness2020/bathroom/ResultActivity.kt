@@ -45,7 +45,7 @@ class ResultActivity : AppCompatActivity() {
             //todo: point losing logic here
         }
 
-        val dictionary = Dict()
+        val dictionary = Dict(this)
         val potentialNewWord = extras.getString("currentWord") ?: ""
         if (dictionary.isValid(potentialNewWord)){
             //This is needed since at this point, the new word would not be in wordsFound yet (but would be in allString())

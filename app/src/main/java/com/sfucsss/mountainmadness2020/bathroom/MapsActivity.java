@@ -37,7 +37,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     MyMap myLocations = new MyMap();
     ArrayList<Pin> pins = myLocations.locations();
     //ArrayList<String> wordsFound = new ArrayList<String>();
-    GameManager gameManager = new GameManager();
+    GameManager gameManager = new GameManager(this);
     Boolean mLocationPermissionGranted = false;
     private final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
