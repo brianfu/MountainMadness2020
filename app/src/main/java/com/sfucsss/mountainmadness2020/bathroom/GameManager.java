@@ -3,10 +3,10 @@ package com.sfucsss.mountainmadness2020.bathroom;
 import java.util.ArrayList;
 
 public class GameManager implements GameManager_I{
-    public Dict myDict;
-    public Stats stat;
-    public MyMap myMap;
-    private Checkpoint currentCheckpoint;
+    public Dict myDict = new Dict();
+    public Stats stat = new Stats();
+    public MyMap myMap = new MyMap();
+    private Checkpoint currentCheckpoint = new Checkpoint(); //these must be init'd else NPE
 
     @Override
     public void update(double x, double y, double timestamp) {

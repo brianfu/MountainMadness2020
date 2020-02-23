@@ -8,9 +8,9 @@ public interface GameManager_I {
     // Return true if the current pattern of string is not in stats and if it is a valid word
     public boolean isValid();
     // This method is used when the player is done with the current string
-    public void finishedCurrentString();
+    public void finishedCurrentString(); //also adds the str to the list
     // returns the last letter
-    public char lastLetter();
+    public char lastLetter(); //Why do I need this? Doesn't gameManager handle all of where the points are anyway?
     // returns the current string
     public String currentString();
     // returns the list of strings already used

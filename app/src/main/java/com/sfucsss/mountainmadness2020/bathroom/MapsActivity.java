@@ -1,6 +1,5 @@
 package com.sfucsss.mountainmadness2020.bathroom;
 
-import androidx.core.util.Pair;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
@@ -25,6 +24,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     MyMap myLocations = new MyMap();
     ArrayList<Pin> pins = myLocations.locations();
     ArrayList<String> wordsFound = new ArrayList<String>();
+    GameManager gameManager = new GameManager();
 
     //Stuff to pass
     protected char lastLetter = 'a'; //default value
@@ -41,6 +41,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        //todo reverse countdowntimer init logic here
     }
 
 
@@ -67,40 +69,59 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
+    public void onUpdate(View view){
+        //update this every second if possible, if not just call it whenever the button's pressed
+        //call gamemanager update
 
-    private int RESULT_CODE = 1111;
+    }
+
+
+    private int statsResultCode = 1111;
     public void onStatsClick(View view){
         Intent statIntent = new Intent(this, StatsActivity.class);
         Bundle extras = new Bundle();
 
 
         //Put stuff in bundle
-        extras.putChar("lastLetter", lastLetter);
-        extras.putString("currentWord", currentWord);
-        extras.putDouble("timeTaken", timeTaken);
-        extras.putInt("distanceTravelled", distanceTravelled);
-        extras.putStringArrayList("wordsFound", wordsFound);
+        extras.putChar("lastLetter", gameManager.lastLetter());
+        extras.putString("currentWord", gameManager.currentString()); //use this in resultActivity, wordsFound is not updated yet
+        extras.putDouble("timeTaken", timeTaken); //todo
+        extras.putInt("distanceTravelled", distanceTravelled); //todo
+        extras.putStringArrayList("wordsFound", gameManager.allString());
+        extras.putBoolean("addWordResult", gameManager.isValid()); //put in a valid word
         //TODO: put more stuff in
 
 
         statIntent.putExtras(extras);
-        startActivityForResult(statIntent, RESULT_CODE);
+        startActivityForResult(statIntent, statsResultCode);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent statIntent) {
-        super.onActivityResult(requestCode, resultCode, statIntent); //java likes super constructor calls on override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent); //java likes super constructor calls on override
+
         // Check which request we're responding to
-        if (requestCode == RESULT_CODE) {
+        if (requestCode == statsResultCode) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                    kill();
+                    wordAdded(intent);
             }
         }
     }
 
-    public void kill(){
-        setResult(RESULT_OK);
-        finish();
+    public void wordAdded(Intent intent){ //this is the intent propagating back from resultActivity
+
+        gameManager.finishedCurrentString(); //add the good word to the dict if so
+
+        Bundle extras = intent.getExtras();
+        extras.putStringArrayList("wordsFound", gameManager.allString()); //update wordsFound
+        this.getIntent().putExtras(extras); //also puts in useLastLetter (from resultActivity)
+
+        //this.intent should now contain updated entries (in extra) on useLastLetter
+        //todo: update something with this info (gameManager should refresh && start at first letter again)
+
+        //Don't kill it, keep persistent map (just finish the re
+        //setResult(RESULT_OK);
+        //finish();
     }
 }

@@ -38,15 +38,27 @@ class ResultActivity : AppCompatActivity() {
         if(wordResult){
             result_string.text = "That is indeed a word!"
 
-            val wordToAdd = extras.getString("currentWord") ?: "Error"
-            wordsFound.add(wordToAdd)
+            //val wordToAdd = extras.getString("currentWord") ?: "Error"
+            //wordsFound.add(wordToAdd) //already done earlier
         }else{
             result_string.text = "That isn't a word!"
             //todo: point losing logic here
         }
 
+        val dictionary = Dict()
+        val potentialNewWord = extras.getString("currentWord") ?: ""
+        if (dictionary.isValid(potentialNewWord)){
+            //This is needed since at this point, the new word would not be in wordsFound yet (but would be in allString())
+            //Therefore, need to add here manually, but no need to shove this back into the returning intent
+            wordsFound.add(potentialNewWord)
+        }
         words_solved.text = wordsStringBuilder(wordsFound)
 
+        val timeTaken = extras.getDouble("timeTaken")
+        time_taken.text = "Time taken: $timeTaken s"
+
+        val distanceTravelled = extras.getInt("distanceTravelled")
+        distance_travelled.text = "Distance travelled: $distanceTravelled m"
     }
 
     fun onContLastLetterClick(view: View){
@@ -73,27 +85,25 @@ class ResultActivity : AppCompatActivity() {
         startActivity(endIntent)
 
         setResult(Activity.RESULT_OK, endIntent)
-        finish()
+        finish() //can leave this in, in case player doesn't want to end after all (otherwise map activity will mess up)
     }
 
 
-    private fun mapIntenter(){
-        val MapIntent = Intent(this, MapsActivity::class.java)
+    private fun mapIntenter(){ //doesn't actually intent anything, just returns back to the original MapsActivity instance
+        val MapIntent = Intent() //this is blank here, use it for data and return it back
 
         bundleAdder()
 
         MapIntent.putExtras(extras)
 
-        startActivity(MapIntent) //have to make the new instance, need the bundle
-
         setResult(Activity.RESULT_OK, MapIntent)
-        finish()
+        finish() //"intent" back into the current MapsActivity, returning the extras bundle in the process
     }
 
     private fun bundleAdder(){ //puts stuff in extras
         //Put stuff in bundle
-        extras.putBoolean("useLastLetter", useLastLetter)
-        extras.putStringArrayList("wordsFound", wordsFound)
+        extras.putBoolean("useLastLetter", useLastLetter) //Tells the map whether to use the last letter or not
+        //extras.putStringArrayList("wordsFound", wordsFound) //gameManager in map does this
         //todo put more stuff in bundle
     }
 

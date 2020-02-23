@@ -2,16 +2,17 @@ package com.sfucsss.mountainmadness2020.bathroom
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_stats.*
 
 class StatsActivity : AppCompatActivity() {
 
     var addWordResult = false //True for good result, false for bad result
     lateinit var extras : Bundle
+    val resultResultCode = 2222
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,17 +40,11 @@ class StatsActivity : AppCompatActivity() {
         confPopupBuilder.setPositiveButton("Yes"){ _, _ ->
             val resultIntent = Intent(this, ResultActivity::class.java)
 
-            //TODO: if word in dict, good result string, else bad result string
-
-            //Change the bundled stuf; prep it for passing
             //Putting stuff into an existing key replaces anything there before
-            extras.putBoolean("addWordResult", addWordResult)
+            //addWordResult already put in (in MapsActivity onStatsClick)
 
             resultIntent.putExtras(extras)
-            startActivity(resultIntent)
-
-            setResult(Activity.RESULT_OK, resultIntent) //activity will pass back RESULT_CANCELED if just pressing back button
-            finish() //activity returns RESULT_OK to caller activity, bind onActivityResult here!
+            startActivityForResult(resultIntent, resultResultCode) //onActivityResult is not called unless this is as well
         }
 
         confPopupBuilder.setNegativeButton("Not really"){ _ , _ ->
@@ -58,6 +53,23 @@ class StatsActivity : AppCompatActivity() {
 
         val dialog = confPopupBuilder.create()
         dialog.show()
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Check which request we're responding to
+        if (requestCode == resultResultCode) { // Make sure the request was successful
+            if (resultCode == Activity.RESULT_OK) {
+                //Shove the intent back to MapsActivity for processing
+                setResult(Activity.RESULT_OK, data) //activity will pass back RESULT_CANCELED if just pressing back button
+                finish() //activity returns RESULT_OK to caller activity, bind onActivityResult here!
+
+                //Just finish these activities, return to same instance of MapsActivity (with data from ResultActivity)
+                //DON'T kill off MapsActivity (unless the game is done, using ProcessPhoenix) !!!
+            }
+        }
 
     }
 }
