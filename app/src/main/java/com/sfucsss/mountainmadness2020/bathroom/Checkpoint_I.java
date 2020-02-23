@@ -1,10 +1,10 @@
 package com.sfucsss.mountainmadness2020.bathroom;
 
 public interface Checkpoint_I {
-    public String currentWord();
-    public double totalTime();
-    public double score();
-    public boolean contains(Pin pin);
-    public boolean equal(Checkpoint checkpoint);
-    public void update(AugmentedPin pin);
+    String currentWord();
+    double totalTime();
+    double score();
+    boolean contains(Pin pin);
+    boolean equal(Checkpoint checkpoint);
+    void update(AugmentedPin pin);
 }

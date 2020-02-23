@@ -18,6 +18,7 @@ public class Dict implements Dict_I{
     public Dict(HashSet<String> dictionary) {
         this.dictionary = dictionary;
     }
+
     @Override
     public boolean isValid(String word) {
         return dictionary.contains(word);

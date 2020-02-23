@@ -1,11 +1,11 @@
 package com.sfucsss.mountainmadness2020.bathroom;
 
 public class Pin {
-    double longitude;
-    double latitude;
-    char letter;
+    public double longitude;
+    public double  latitude;
+    public char letter;
 
-    Pin(double longitude, double latitude, char letter) {
+    public Pin(double longitude, double latitude, char letter) {
         this.longitude = longitude;
         this.latitude = latitude;
         this.letter = letter;
