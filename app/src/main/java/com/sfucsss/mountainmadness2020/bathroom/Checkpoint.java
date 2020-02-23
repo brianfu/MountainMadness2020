@@ -34,10 +34,13 @@ public class Checkpoint {
     }
     public boolean search(Pin pin) {
         for (Pin x : pins) {
- //           if (pin.equal(x)) {
- //               return true;
- //           }
+            if (pin.equal(x)) {
+                return true;
+            }
         }
         return false;
+    }
+    public boolean equal(Checkpoint checkpoint) {
+        return this.currentWord().equals(checkpoint.currentWord());
     }
 }
