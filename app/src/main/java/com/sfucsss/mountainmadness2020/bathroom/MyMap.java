@@ -1,5 +1,7 @@
 package com.sfucsss.mountainmadness2020.bathroom;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.io.*;
 import java.lang.String;
@@ -12,7 +14,7 @@ public class MyMap implements MyMap_I{
     private int s3 = 23;
     private ArrayList<Pin> pins;
 
-    public MyMap() {
+    public MyMap(Context context) {
         this.s1 = 0;
         this.s2 = 11;
         this.s3 = 23;

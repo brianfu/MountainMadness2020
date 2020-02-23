@@ -14,7 +14,7 @@ public class GameManager implements GameManager_I{
     GameManager(Context context) {
         myDict = new Dict(context);
         stat = new Stats();
-        myMap = new MyMap();
+        myMap = new MyMap(context);
         this.context = context;
         currentCheckpoint = new Checkpoint();
     }
@@ -25,8 +25,8 @@ public class GameManager implements GameManager_I{
         Pin pin_temp;
         Checkpoint checkpoint_temp = new Checkpoint();
         // check if x,y is within the 10m radius (func provided) return boolean
-        boolean flag = myMap.isCloseEnough(x, y);
-        if (flag) { // if true: get pin from myMap
+        boolean isCloseEnough = myMap.isCloseEnough(x, y);
+        if (isCloseEnough) { // if true: get pin from myMap
             pin_temp = myMap.getClosePin(x, y);
         } else { // if false: return
             return;
@@ -34,16 +34,16 @@ public class GameManager implements GameManager_I{
         // check if pin is in current checkpoint (use checkpoint contains)
         AugmentedPin AugPin_temp = new AugmentedPin(pin_temp.longitude, pin_temp.latitude,
                                                     pin_temp.letter, timestamp);
-        flag = checkpoint_temp.contains(pin_temp);
-        if (!flag) { // if false: add to temp checkpoint
+        isCloseEnough = checkpoint_temp.contains(pin_temp);
+        if (!isCloseEnough) { // if false: add to temp checkpoint
             checkpoint_temp.update(AugPin_temp);
         } else { // if true: return
             return;
         }
         // add to temp checkpoint
         // when done, check if string is in stats
-        flag = stat.contains(checkpoint_temp);
-        if (flag) { // if false: add to stats (use update in stats)
+        isCloseEnough = stat.contains(checkpoint_temp);
+        if (isCloseEnough) { // if false: add to stats (use update in stats)
             stat.update(checkpoint_temp);
         } else { // if true: return
             return;

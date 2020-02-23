@@ -17,7 +17,7 @@ public class Dict implements Dict_I{
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(
-                    new InputStreamReader(context.getAssets().open("dictionary.txt"), "UTF-8"));
+                    new InputStreamReader(context.getResources().openRawResource(R.raw.dictionary)));
 
             // do reading, usually loop until end of file reading
             String mLine;
