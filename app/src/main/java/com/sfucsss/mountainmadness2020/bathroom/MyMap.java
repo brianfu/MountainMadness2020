@@ -9,16 +9,9 @@ import java.lang.Math.*;
 
 public class MyMap implements MyMap_I{
 
-    private int s1 = 0;
-    private int s2 = 11;
-    private int s3 = 23;
     public ArrayList<Pin> pins;
 
     public MyMap(Context context) {
-        this.s1 = 0;
-        this.s2 = 11;
-        this.s3 = 23;
-
         BufferedReader reader = null;
         pins = new ArrayList<Pin>();
         try {
@@ -45,29 +38,6 @@ public class MyMap implements MyMap_I{
                 }
             }
         }
-
-/*        File file = new File("/pins.txt");
-        FileReader fr;
-        try {
-            fr = new FileReader(file);
-        } catch(FileNotFoundException f) {
-            return;
-        }
-        BufferedReader br = new BufferedReader(fr);
-        pins = new ArrayList<Pin>();
-        String st;
-        do {
-            try {
-                st = br.readLine();
-            } catch(IOException s) {
-                return;
-            }
-            double longitude = Double.parseDouble(st.substring(s1, st.indexOf(st, s1)));
-            double latitude = Double.parseDouble(st.substring(s2, st.indexOf(st, s2)));
-            char letter = st.charAt(s3);
-            Pin p = new Pin(longitude, latitude, letter);
-            pins.add(p);
-        } while (st != null);*/
     }
     // creates array of possible pin locations
     @Override
@@ -79,7 +49,6 @@ public class MyMap implements MyMap_I{
     @Override
     public boolean isCloseEnough(double longitude, double latitude) {
         double radiusErr = 0.0001;
-        //ArrayList<Pin> locations = locations();
         for (Pin pin : locations()){
             double dist = Math.sqrt(Math.pow(longitude - pin.longitude,2)+Math.pow(latitude - pin.latitude,2));
             if (dist < radiusErr) {
