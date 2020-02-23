@@ -24,11 +24,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //Latitude, Longitude
     MyMap myLocations = new MyMap();
     ArrayList<Pin> pins = myLocations.locations();
+    ArrayList<String> wordsFound = new ArrayList<String>();
 
     //Stuff to pass
     protected char lastLetter = 'a'; //default value
     protected String currentWord = "";
-    protected Double timeTaken = 0.0;
+    protected Double timeTaken = 0.0; //set this up here and give it to a function
     protected int distanceTravelled = 0;
     //...
 
@@ -77,6 +78,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         extras.putString("currentWord", currentWord);
         extras.putDouble("timeTaken", timeTaken);
         extras.putInt("distanceTravelled", distanceTravelled);
+        extras.putStringArrayList("wordsFound", wordsFound);
         //TODO: put more stuff in
 
 
