@@ -5,7 +5,7 @@ import com.sfucsss.mountainmadness2020.bathroom.Checkpoint;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Stats implements  Stats_I{
+public class Stats implements Stats_I{
     private ArrayList<Checkpoint> checkpoints;
 
     public Stats() {
@@ -27,14 +27,6 @@ public class Stats implements  Stats_I{
         double returnValue = 0;
         for (Checkpoint x : checkpoints) {
             returnValue += x.totalTime();
-        }
-        return returnValue;
-    }
-    @Override
-    public double totalDistance() {
-        double returnValue = 0;
-        for (Checkpoint x : checkpoints) {
-            returnValue += x.totalDistance();
         }
         return returnValue;
     }

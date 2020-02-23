@@ -28,14 +28,6 @@ public class Checkpoint implements Checkpoint_I {
         return returnTime;
     }
     @Override
-    public double totalDistance() {
-        double returnDistance = 0;
-        for (int i = 0; i < pins.size() - 1; ++i) {
-            returnDistance += pins.get(i + 1).distanceStamp - pins.get(i).distanceStamp;
-        }
-        return returnDistance;
-    }
-    @Override
     public double score() {
         return currentWord().length();
     }
