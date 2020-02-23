@@ -11,8 +11,8 @@ public interface GameManager_I {
     public void finishedCurrentString();
     // returns the last letter
     public char lastLetter();
-    // returns the last string
-    public String lastString();
+    // returns the current string
+    public String currentString();
     // returns the list of strings already used
     public ArrayList<String> allString();
 }

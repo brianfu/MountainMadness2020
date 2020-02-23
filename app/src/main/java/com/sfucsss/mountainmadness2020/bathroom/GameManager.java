@@ -36,34 +36,48 @@ public class GameManager implements GameManager_I{
         } else { // if true: return
             return;
         }
-        return;;
+        return;
     }
 
     @Override
     public boolean isValid() { // Return true if the current pattern of string is not in stats and if it is a valid word
         // check if current checkpoint's string is in stats
-
+        // if true
+        if (stat.contains(currentCheckpoint)) {
+            if (myDict.isValid(currentCheckpoint.currentWord())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public void finishedCurrentString() { // This method is used when the player is done with the current string
-
+        // check if current checkpoint's string is valid
+        if (isValid()) {
+            stat.update(currentCheckpoint);
+        }
+        // reset current checkpoint
+        currentCheckpoint = new Checkpoint();
     }
 
     @Override
     public char lastLetter() { // returns the last letter
-
+        String s = currentCheckpoint.currentWord();
+        if (s.isEmpty()) {
+            return '!';
+        }
+        return s.charAt(s.length()-1);
     }
 
     @Override
-    public String lastString() { // returns the last string
-
-
+    public String currentString() { // returns the current string
+        return currentCheckpoint.currentWord();
     }
 
     @Override
     public ArrayList<String> allString() { // returns the list of strings already used
-
+        return;
     }
 
 }
