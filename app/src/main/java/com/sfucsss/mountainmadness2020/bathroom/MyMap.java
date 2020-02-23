@@ -18,7 +18,35 @@ public class MyMap implements MyMap_I{
         this.s1 = 0;
         this.s2 = 11;
         this.s3 = 23;
-        File file = new File("/pins.txt");
+
+        BufferedReader reader = null;
+        pins = new ArrayList<Pin>();
+        try {
+            reader = new BufferedReader(
+                    new InputStreamReader(context.getResources().openRawResource(R.raw.pins)));
+
+            // do reading, usually loop until end of file reading
+            for (String st = reader.readLine(); st != null; st = reader.readLine()) {
+                String[] temp = st.split(" ");
+                double longitude = Double.parseDouble(temp[0]);
+                double latitude = Double.parseDouble(temp[1]);
+                char letter = temp[2].charAt(0);
+                Pin p = new Pin(longitude, latitude, letter);
+                pins.add(p);
+            }
+        } catch (IOException e) {
+            //log the exception
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    //log the exception
+                }
+            }
+        }
+
+/*        File file = new File("/pins.txt");
         FileReader fr;
         try {
             fr = new FileReader(file);
@@ -39,7 +67,7 @@ public class MyMap implements MyMap_I{
             char letter = st.charAt(s3);
             Pin p = new Pin(longitude, latitude, letter);
             pins.add(p);
-        } while (st != null);
+        } while (st != null);*/
     }
     // creates array of possible pin locations
     @Override
