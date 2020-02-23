@@ -89,9 +89,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             // Set the map's camera position to the current location of the device.
 
                             mLastKnownLocation = (Location) task.getResult();
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                    new LatLng(mLastKnownLocation.getLatitude(),
-                                            mLastKnownLocation.getLongitude()), 12));
+//                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+//                                    new LatLng(mLastKnownLocation.getLatitude(),
+//                                            mLastKnownLocation.getLongitude()), 12));
                         } else {
                             Log.d("loc", "Current location is null. Using defaults.");
                             Log.e("loc", "Exception: %s", task.getException());
@@ -172,6 +172,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (counter == 0){
             View view = new View(this);
+            getDeviceLocation();
             gameManager.update(mLastKnownLocation.getLongitude(), mLastKnownLocation.getLatitude(), timeTaken);
             counter = 200; //reset counter
         }else{
@@ -311,6 +312,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         this.getIntent().putExtras(extras); //also puts in useLastLetter (from resultActivity)
 
         //this.intent should now contain updated entries (in extra) on useLastLetter
+        Boolean useLastLetter = extras.getBoolean("useLastLetter");
+        //by default uses last letter rn
         //todo: update something with this info (gameManager should refresh && start at first letter again)
 
         //Don't kill it, keep persistent map
