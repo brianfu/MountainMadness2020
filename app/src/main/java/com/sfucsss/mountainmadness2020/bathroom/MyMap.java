@@ -50,6 +50,7 @@ public class MyMap {
         return false;
     }
 
+    // gets closest pin to current location if within radius error
     public Pin getClosePin(double longitude, double latitude) {
         double radiusErr = 0.0001;
         for (Pin pin : locations()){
