@@ -89,9 +89,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             // Set the map's camera position to the current location of the device.
 
                             mLastKnownLocation = (Location) task.getResult();
-//                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-//                                    new LatLng(mLastKnownLocation.getLatitude(),
-//                                            mLastKnownLocation.getLongitude()), 12));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                    new LatLng(mLastKnownLocation.getLatitude(),
+                                            mLastKnownLocation.getLongitude()), 12));
                         } else {
                             Log.d("loc", "Current location is null. Using defaults.");
                             Log.e("loc", "Exception: %s", task.getException());
@@ -163,7 +163,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //End google maps garbage
 
 
-    private int counter = 200;
+    private int counter = 50;
 
     @Override
     public void onTick(Stopwatch stopwatch){
@@ -172,9 +172,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (counter == 0){
             View view = new View(this);
-            getDeviceLocation();
-            gameManager.update(mLastKnownLocation.getLongitude(), mLastKnownLocation.getLatitude(), timeTaken);
-            counter = 200; //reset counter
+            onUpdate(view);
+            //gameManager.update(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude(), timeTaken);
+            counter = 50; //reset counter
         }else{
             counter--;
             Log.d("counter", "counter: " + counter);
@@ -242,6 +242,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         getDeviceLocation();
+        gameManager.update(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude(), timeTaken);
 
         //Pin lastpin = pinlist.get(pinlist.size() - 1);
 //        LatLng tmpLL = new LatLng(lastpin.latitude, lastpin.longitude);
