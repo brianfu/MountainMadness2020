@@ -77,7 +77,7 @@ public class GameManager implements GameManager_I{
 
     @Override
     public ArrayList<String> allString() { // returns the list of strings already used
-        return;
+        return stat.words();
     }
 
 }
