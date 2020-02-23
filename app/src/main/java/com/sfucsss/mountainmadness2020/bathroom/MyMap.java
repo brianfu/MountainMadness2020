@@ -12,7 +12,7 @@ public class MyMap implements MyMap_I{
     private int s1 = 0;
     private int s2 = 11;
     private int s3 = 23;
-    private ArrayList<Pin> pins;
+    public ArrayList<Pin> pins;
 
     public MyMap(Context context) {
         this.s1 = 0;

@@ -92,4 +92,7 @@ public class GameManager implements GameManager_I{
         return stat.words();
     }
 
+    @Override
+    public ArrayList<Pin> allPins() {return myMap.locations();}
+
 }

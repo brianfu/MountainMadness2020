@@ -14,4 +14,5 @@ public interface GameManager_I {
     String currentString();
     // returns the list of strings already used
     ArrayList<String> allString();
+    ArrayList<Pin> allPins();
 }
