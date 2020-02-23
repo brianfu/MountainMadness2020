@@ -1,5 +1,6 @@
 package com.sfucsss.mountainmadness2020.bathroom
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_stats.*
 
 class StatsActivity : AppCompatActivity() {
 
-    var resultString = "Result String" //placeholder
+    var addWordResult = false //True for good result, false for bad result
     lateinit var extras : Bundle
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,12 +39,17 @@ class StatsActivity : AppCompatActivity() {
         confPopupBuilder.setPositiveButton("Yes"){ _, _ ->
             val resultIntent = Intent(this, ResultActivity::class.java)
 
+            //TODO: if word in dict, good result string, else bad result string
+
             //Change the bundled stuf; prep it for passing
             //Putting stuff into an existing key replaces anything there before
-            extras.putString("resultString", resultString)
+            extras.putBoolean("addWordResult", addWordResult)
 
             resultIntent.putExtras(extras)
             startActivity(resultIntent)
+
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
         }
 
         confPopupBuilder.setNegativeButton("Not really"){ _ , _ ->
