@@ -34,8 +34,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //public CountTimer timer;
 
     //Latitude, Longitude
-    MyMap myLocations = new MyMap();
-    ArrayList<Pin> pins = myLocations.locations();
+    MyMap myLocations;
+    ArrayList<Pin> pins;
     //ArrayList<String> wordsFound = new ArrayList<String>();
     GameManager gameManager;
     Boolean mLocationPermissionGranted = false;
@@ -68,6 +68,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         getLocationPermission();
         mFusedLocationProviderClient = new FusedLocationProviderClient(this);
         gameManager = new GameManager(this);
+
+        myLocations = new MyMap(this);
+        pins = myLocations.locations();
     }
 
     //Start google maps garbage
@@ -214,13 +217,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         getDeviceLocation();
 
-        for(Pin ele : pinlistTest){
+        ArrayList<Pin> pinlist = gameManager.allPins();
+
+        Pin lastpin = new Pin(1500.0,1000.0, 'a'); //last thing pinned, move camera to this
+
+//        lastpin= new Pin(200.0, 300.0, 'c');
+//        Pin pin2 = new Pin(300.0, 200.0, 'b');
+//        ArrayList<Pin> pinlist = new ArrayList<Pin>();
+//        pinlist.add(lastpin);
+//        pinlist.add(pin2);
+
+        for(Pin ele : pinlist){
             LatLng newLoc = new LatLng(ele.latitude, ele.longitude);
             Marker marker = mMap.addMarker(new MarkerOptions().position(newLoc).title(String.valueOf(ele.letter)));
-            marker.showInfoWindow();;
+            marker.showInfoWindow();
+            lastpin = ele;
         }
 
-        LatLng tmpLL = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
+        LatLng tmpLL = new LatLng(lastpin.latitude, lastpin.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(tmpLL));
 
         updateLocationUI();
