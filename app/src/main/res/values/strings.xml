@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">Bathroom</string>
-    <string name="title_activity_finder">Bathroom Finder</string>
+    <string name="app_name">Mazer</string>
+    <string name="title_activity_finder">Maze Runner</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

@@ -1,7 +1,9 @@
 package com.sfucsss.mountainmadness2020.bathroom
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -15,11 +17,18 @@ class FinderActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
 
     //Latitude, Longtitude
-    var coords : HashMap<Double, Double> = hashMapOf(-1.0 to 1.0, -2.0 to 3.0, 49.279692 to -122.925180,
+    var coords : ArrayList<Pair<Double, Double>> = arrayListOf(49.279692 to -122.925180,
         49.278593 to -122.924697, 49.278656 to -122.924826, 49.278726 to -122.922294, 49.279790 to -122.918861,
         49.275628 to -122.921601, 49.279855 to -122.918583, 49.281199 to -122.916630, 49.277211 to -122.916170,
         49.278114 to -122.914807, 49.277995 to -122.911867, 49.277888 to -122.909876, 49.280389 to -122.907480,
         49.277423 to -122.904471, 49.274531 to -122.912496)
+
+    //Stuff to pass
+    internal var lastLetter : Char = 'a'
+    internal var current_word : String = ""
+    //...
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,5 +57,18 @@ class FinderActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(sydney).title("A"))
             .showInfoWindow()
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
     }
+
+    fun onStatsClick(view : View){
+        val statIntent = Intent(this, StatsActivity::class.java)
+        val extras = Bundle()
+
+        //Put stuff in bundle
+        extras.putChar("lastLetter", lastLetter)
+
+        statIntent.putExtras(extras)
+        startActivity(statIntent)
+    }
+
 }

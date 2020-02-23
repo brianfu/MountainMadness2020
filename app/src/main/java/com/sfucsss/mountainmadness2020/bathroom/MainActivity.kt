@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     fun mapButtonClick(view : View){
 
-        val mapIntent = Intent(this, FinderActivity::class.java)
+        val mapIntent = Intent(this, MapsActivity::class.java)
         mapIntent.putExtra("hello", "world")
 
         startActivity(mapIntent)
