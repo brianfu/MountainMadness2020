@@ -21,6 +21,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -36,4 +40,7 @@ dependencies {
 
     //ProcessPhoenix
     implementation 'com.jakewharton:process-phoenix:2.0.0'
+
+    //TimeIt
+    implementation 'com.yashovardhan99.timeit:timeit:1.2.0'
 }

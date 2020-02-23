@@ -80,6 +80,8 @@ class ResultActivity : AppCompatActivity() {
 
         bundleAdder() //just use default value for useLastLetter, we don't care
 
+        extras.putBoolean("isEnding", true) //tell MapsActivity that we are ending the game, stop the timer!
+
         endIntent.putExtras(extras)
 
         startActivity(endIntent)

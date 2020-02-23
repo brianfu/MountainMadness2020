@@ -49,6 +49,7 @@ public class MyMap implements MyMap_I{
     @Override
     public boolean isCloseEnough(double longitude, double latitude) {
         double radiusErr = 0.0001;
+        //ArrayList<Pin> locations = locations();
         for (Pin pin : locations()){
             double dist = Math.sqrt(Math.pow(longitude - pin.longitude,2)+Math.pow(latitude - pin.latitude,2));
             if (dist < radiusErr) {
