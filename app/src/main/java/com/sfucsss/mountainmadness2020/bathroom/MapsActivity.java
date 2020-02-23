@@ -68,6 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+    private int RESULT_CODE = 1111;
     public void onStatsClick(View view){
         Intent statIntent = new Intent(this, StatsActivity.class);
         Bundle extras = new Bundle();
@@ -83,6 +84,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         statIntent.putExtras(extras);
-        startActivity(statIntent);
+        startActivityForResult(statIntent, RESULT_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent statIntent) {
+        super.onActivityResult(requestCode, resultCode, statIntent); //java likes super constructor calls on override
+        // Check which request we're responding to
+        if (requestCode == RESULT_CODE) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                    kill();
+            }
+        }
+    }
+
+    public void kill(){
+        setResult(RESULT_OK);
+        finish();
     }
 }

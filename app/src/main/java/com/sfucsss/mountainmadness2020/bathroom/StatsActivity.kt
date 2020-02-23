@@ -48,8 +48,8 @@ class StatsActivity : AppCompatActivity() {
             resultIntent.putExtras(extras)
             startActivity(resultIntent)
 
-            setResult(Activity.RESULT_OK, resultIntent)
-            finish()
+            setResult(Activity.RESULT_OK, resultIntent) //activity will pass back RESULT_CANCELED if just pressing back button
+            finish() //activity returns RESULT_OK to caller activity, bind onActivityResult here!
         }
 
         confPopupBuilder.setNegativeButton("Not really"){ _ , _ ->

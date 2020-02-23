@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.jakewharton.processphoenix.ProcessPhoenix
 import kotlinx.android.synthetic.main.activity_end.*
 
 class EndActivity : AppCompatActivity() {
@@ -33,11 +34,17 @@ class EndActivity : AppCompatActivity() {
     fun onPlayAgainClick(view: View){
         //Game is over, don't hand the bundle back!!!
 
+        /*
         val newGameIntent = Intent(this, MainActivity::class.java)
         //Don't hand bundle back, make new one in new MapsActivity
 
         startActivity(newGameIntent)
-        setResult(Activity.RESULT_OK, newGameIntent)
-        finish()
+         */
+        setResult(Activity.RESULT_OK) //not sure if processphoenix kills this activity or not
+
+        //Jake Wharton's Process Phoenix
+        ProcessPhoenix.triggerRebirth(this)
+
+        finish() //kill it here just in case
     }
 }

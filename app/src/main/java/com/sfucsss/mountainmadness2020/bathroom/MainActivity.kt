@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 
+//TODO: still have to find a way to pass an event from this instance's EndActivity to this instance, to kill this instance
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,8 +20,8 @@ class MainActivity : AppCompatActivity() {
         //Bundle is inited in MapsActivity
         startActivity(mapIntent)
 
-        setResult(Activity.RESULT_OK, mapIntent)
-        finish(); //Kill this
+        //Let this be the only activity that maintains itself constantly throughout the app's lifecycle
+
     }
 
 }
