@@ -65,10 +65,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         timer.setOnTickListener(this);
         timer.start();
 
-        gameManager = new GameManager(this);
-
         getLocationPermission();
         mFusedLocationProviderClient = new FusedLocationProviderClient(this);
+        gameManager = new GameManager(this);
     }
 
     //Start google maps garbage

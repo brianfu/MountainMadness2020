@@ -28,7 +28,7 @@ class EndActivity : AppCompatActivity() {
         time_taken.text = "Time taken = $timeTaken s"
 
         val distanceTravelled = extras.getInt("distanceTravelled")
-        distance_travelled.text = "Distance Travelled: $distanceTravelled m"
+        //distance_travelled.text = "Distance Travelled: $distanceTravelled m"
     }
 
     fun onPlayAgainClick(view: View){

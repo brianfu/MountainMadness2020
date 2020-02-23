@@ -58,7 +58,7 @@ class ResultActivity : AppCompatActivity() {
         time_taken.text = "Time taken: $timeTaken s"
 
         val distanceTravelled = extras.getInt("distanceTravelled")
-        distance_travelled.text = "Distance travelled: $distanceTravelled m"
+        //distance_travelled.text = "Distance travelled: $distanceTravelled m"
     }
 
     fun onContLastLetterClick(view: View){

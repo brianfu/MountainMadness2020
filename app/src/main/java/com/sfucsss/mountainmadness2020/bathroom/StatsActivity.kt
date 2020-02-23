@@ -27,7 +27,7 @@ class StatsActivity : AppCompatActivity() {
         time_taken.text = "Time taken: $time_taken_seconds s"
 
         val distance_travelled_meters = extras.getInt("distanceTravelled")
-        distance_travelled.text = "Distance travelled: $distance_travelled_meters m"
+        //distance_travelled.text = "Distance travelled: $distance_travelled_meters m"
 
     }
 
