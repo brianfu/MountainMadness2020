@@ -5,29 +5,32 @@ import java.io.*;
 import java.lang.String;
 import java.lang.Math.*;
 
-public class MyMap {
+public class MyMap implements MyMap_I{
 
-    int s1 = 0;
-    int s2 = 11;
-    int s3 = 23;
+    private int s1 = 0;
+    private int s2 = 11;
+    private int s3 = 23;
+    private ArrayList<Pin> pins;
 
-    // creates array of possible pin locations
-    public ArrayList<Pin> locations() {
+    public MyMap(int s1, int s2, int s3) {
+        this.s1 = 0;
+        this.s2 = 11;
+        this.s3 = 23;
         File file = new File("/pins.txt");
         FileReader fr;
         try {
             fr = new FileReader(file);
         } catch(FileNotFoundException f) {
-            return null;
+            return;
         }
         BufferedReader br = new BufferedReader(fr);
-        ArrayList<Pin> pins = new ArrayList<Pin>();
+        pins = new ArrayList<Pin>();
         String st;
         do {
             try {
                 st = br.readLine();
             } catch(IOException s) {
-                return null;
+                return;
             }
             double longitude = Double.parseDouble(st.substring(s1, st.indexOf(st, s1)));
             double latitude = Double.parseDouble(st.substring(s2, st.indexOf(st, s2)));
@@ -35,10 +38,15 @@ public class MyMap {
             Pin p = new Pin(longitude, latitude, letter);
             pins.add(p);
         } while (st != null);
+    }
+    // creates array of possible pin locations
+    @Override
+    public ArrayList<Pin> locations() {
         return pins;
     }
 
     // checks if current location is close enough to pin in locations
+    @Override
     public boolean isCloseEnough(double longitude, double latitude) {
         double radiusErr = 0.0001;
         for (Pin pin : locations()){
@@ -51,6 +59,7 @@ public class MyMap {
     }
 
     // gets closest pin to current location if within radius error
+    @Override
     public Pin getClosePin(double longitude, double latitude) {
         double radiusErr = 0.0001;
         for (Pin pin : locations()){
