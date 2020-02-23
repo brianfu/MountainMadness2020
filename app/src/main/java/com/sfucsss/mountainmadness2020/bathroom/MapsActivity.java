@@ -37,7 +37,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     MyMap myLocations = new MyMap();
     ArrayList<Pin> pins = myLocations.locations();
     //ArrayList<String> wordsFound = new ArrayList<String>();
-    GameManager gameManager = new GameManager(this);
+    GameManager gameManager;
     Boolean mLocationPermissionGranted = false;
     private final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
@@ -61,14 +61,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        //todo reverse countdowntimer init logic here
         timer = new Stopwatch();
         timer.setOnTickListener(this);
         timer.start();
 
+        gameManager = new GameManager(this);
+
         getLocationPermission();
         mFusedLocationProviderClient = new FusedLocationProviderClient(this);
-
     }
 
     //Start google maps garbage
@@ -161,13 +161,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //End google maps garbage
 
 
+    private int counter = 200;
+
     @Override
     public void onTick(Stopwatch stopwatch){
         Log.d("Stopwatch (ms)", String.valueOf(stopwatch.getElapsedTime()));
         timeTaken = (double) stopwatch.getElapsedTime() / 1000; //Time is given in ms, convert to s
 
-        View view = new View(this);
-        onUpdate(view); //don't actually need the value, the pass is needed to have it work with the button, putting in garbage is fine
+        if (counter == 0){
+            View view = new View(this);
+            onUpdate(view); //don't actually need the value, the pass is needed to have it work with the button, putting in garbage is fine
+            counter = 200; //reset counter
+        }else{
+            counter--;
+            Log.d("counter", "counter: " + counter);
+        }
+
     }
 
 
@@ -197,12 +206,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         getDeviceLocation();
     }
 
+    private ArrayList<Pin> pinlistTest = new ArrayList<Pin>();
     public void onUpdate(View view){
         //update this every second if possible, if not just call it whenever the button's pressed
 
         //gameManager.update(0.0, 0.0, timeTaken); //todo implement curr_location grabbing and put in appropiately
         //gameManager.update is currently broken (myMap NPE)
 
+        getDeviceLocation();
+
+        for(Pin ele : pinlistTest){
+            LatLng newLoc = new LatLng(ele.latitude, ele.longitude);
+            Marker marker = mMap.addMarker(new MarkerOptions().position(newLoc).title(String.valueOf(ele.letter)));
+            marker.showInfoWindow();;
+        }
+
+        LatLng tmpLL = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(tmpLL));
+
+        updateLocationUI();
     }
 
 
