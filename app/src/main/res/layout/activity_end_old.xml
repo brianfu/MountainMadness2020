@@ -41,26 +41,18 @@
         android:id="@+id/time_taken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginBottom="100dp"
         android:text="Time taken: NaN s"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/words_found" />
-
-    <TextView
-        android:id="@+id/distance_travelled"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Distance travelled: NaN m"
-        android:textAlignment="center"
-        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/play_again"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time_taken" />
+        app:layout_constraintTop_toBottomOf="@+id/words_found" />
 
     <Button
         android:id="@+id/play_again"
