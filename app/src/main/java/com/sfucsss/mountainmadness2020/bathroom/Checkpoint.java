@@ -2,7 +2,7 @@ package com.sfucsss.mountainmadness2020.bathroom;
 
 import java.util.ArrayList;
 
-public class Checkpoint {
+public class Checkpoint implements Checkpoint_I {
     private ArrayList<AugmentedPin> pins;
 
     public Checkpoint() {
@@ -11,6 +11,7 @@ public class Checkpoint {
     public Checkpoint(ArrayList<AugmentedPin> pins) {
         this.pins = pins;
     }
+    @Override
     public String currentWord() {
         String returnString = "";
         for (AugmentedPin x : pins) {
@@ -18,6 +19,7 @@ public class Checkpoint {
         }
         return returnString;
     }
+    @Override
     public double totalTime() {
         double returnTime = 0;
         for (int i = 0; i < pins.size() - 1; ++i) {
@@ -25,6 +27,7 @@ public class Checkpoint {
         }
         return returnTime;
     }
+    @Override
     public double totalDistance() {
         double returnDistance = 0;
         for (int i = 0; i < pins.size() - 1; ++i) {
@@ -32,9 +35,11 @@ public class Checkpoint {
         }
         return returnDistance;
     }
+    @Override
     public double score() {
         return currentWord().length();
     }
+    @Override
     public boolean contains(Pin pin) {
         for (Pin x : pins) {
             if (pin.equal(x)) {
@@ -43,9 +48,11 @@ public class Checkpoint {
         }
         return false;
     }
+    @Override
     public boolean equal(Checkpoint checkpoint) {
         return this.currentWord().equals(checkpoint.currentWord());
     }
+    @Override
     public void update(AugmentedPin pin) {
         pins.add(pin);
     }

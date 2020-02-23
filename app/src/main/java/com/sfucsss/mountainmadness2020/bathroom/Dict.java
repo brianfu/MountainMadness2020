@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Scanner;
 
-public class Dict {
+public class Dict implements Dict_I{
     private HashSet<String> dictionary;
 
     public Dict() {
@@ -18,6 +18,7 @@ public class Dict {
     public Dict(HashSet<String> dictionary) {
         this.dictionary = dictionary;
     }
+    @Override
     public boolean isValid(String word) {
         return dictionary.contains(word);
     }
