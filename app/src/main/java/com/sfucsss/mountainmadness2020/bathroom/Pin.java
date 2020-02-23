@@ -10,4 +10,8 @@ public class Pin {
         this.latitude = latitude;
         this.letter = letter;
     }
+    public boolean equal(Pin pin) {
+        return pin.longitude == this.longitude &&
+                pin.latitude == this.latitude;
+    }
 }
