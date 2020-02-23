@@ -12,7 +12,7 @@ public class MyMap implements MyMap_I{
     private int s3 = 23;
     private ArrayList<Pin> pins;
 
-    public MyMap(int s1, int s2, int s3) {
+    public MyMap() {
         this.s1 = 0;
         this.s2 = 11;
         this.s3 = 23;
