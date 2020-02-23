@@ -5,6 +5,9 @@ import java.util.ArrayList;
 public class Checkpoint {
     private ArrayList<AugmentedPin> pins;
 
+    public Checkpoint() {
+        pins = new ArrayList<AugmentedPin>();
+    }
     public Checkpoint(ArrayList<AugmentedPin> pins) {
         this.pins = pins;
     }
@@ -42,5 +45,8 @@ public class Checkpoint {
     }
     public boolean equal(Checkpoint checkpoint) {
         return this.currentWord().equals(checkpoint.currentWord());
+    }
+    public void update(AugmentedPin pin) {
+        pins.add(pin);
     }
 }
