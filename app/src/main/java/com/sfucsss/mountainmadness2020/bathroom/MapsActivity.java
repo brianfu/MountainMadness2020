@@ -16,14 +16,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
-    //Latitude, Longtitude
-    public ArrayList<Pair<Double, Double>> coords; //TODO
+    //Latitude, Longitude
+    myMap myLocations = new myMap();
+    ArrayList<Pin> pins = myLocations.locations();
 
     //Stuff to pass
     protected char lastLetter = 'a'; //default value
